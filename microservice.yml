@@ -93,14 +93,14 @@ actions:
       method: post
       port: 8000
     output:
-      type: map
+      type: list
 
   retweet:
     help: Retweet a tweet
     arguments:
       tweet:
         in: requestBody
-        type: int
+        type: string
         required: true
     http:
       path: /retweet

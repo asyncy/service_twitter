@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "twitter"
+version = "1.0.0"
+description = ""
+authors = ["Omkar Bhutkar <obhutkar@heaptrace.com>"]
+
+[tool.poetry.dependencies]
+python-dotenv = "^0.10.3"
+pytest = "^5.0"
+pytest-flask = "^0.15.0"

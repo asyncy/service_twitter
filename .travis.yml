@@ -1,0 +1,27 @@
+# Disable sudo to speed up the build
+sudo: false
+
+# Set OS  for build
+dist: xenial
+
+# Set the build language to Python
+language: python
+
+# Set the python version to 2.7
+python: 3.7
+
+# Install the codecov pip dependency
+install:
+  - pip install -r requirements.txt
+  - pip install pytest==5.0.1
+  - pip install pytest-flask==0.15.0
+  - pip install pytest-cov==2.7.1
+  - pip install poetry
+
+# Run the unit test
+script:
+  - poetry run pytest --cov=app --cov=stream
+
+# Push the results back to codecov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

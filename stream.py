@@ -2,6 +2,7 @@ from twitter.stream import TwitterStream, Timeout, HeartbeatTimeout, Hangup
 from json import dumps
 import requests
 import threading
+import sys
 
 
 class Stream(threading.Thread):
@@ -9,6 +10,10 @@ class Stream(threading.Thread):
         threading.Thread.__init__(self)
         stream = TwitterStream(auth=auth, block=True)
         self.stopped = False
+        if subscription['data'].get('isTesting') is not None and subscription['data'].get('isTesting') != "" :
+            self.testing = subscription['data'].get('isTesting')
+        else:
+            self.testing = False
         self.endpoint = subscription['endpoint']
 
         if subscription['data'].get('track'):
@@ -44,5 +49,9 @@ class Stream(threading.Thread):
                         'data': tweet
                     })
                 )
+                if self.testing is True :
+                    sys.exit()
             else:
                 print(f'Stream: Other {str(tweet)}')
+                if self.testing is True :
+                    sys.exit()
