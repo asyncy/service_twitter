@@ -2,7 +2,7 @@
 name = "twitter"
 version = "1.0.0"
 description = ""
-authors = ["Omkar Bhutkar <obhutkar@heaptrace.com>"]
+authors = ["support@storyscript.io"]
 
 [tool.poetry.dependencies]
 python-dotenv = "^0.10.3"
