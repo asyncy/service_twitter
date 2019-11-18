@@ -32,6 +32,20 @@ def test_retweet_request_fail(client):
     assert response.status_code == HTTPStatus.BAD_REQUEST
 
 
+def test_unretweet_request(client):
+    data = {"tweet": os.environ["RETWEET_ID"]}
+    url = "/unretweet"
+    response = client.post(url, json=data)
+    assert response.status_code == HTTPStatus.OK
+
+
+def test_unretweet_request_fail(client):
+    data = {"id": ""}
+    url = "/unretweet"
+    response = client.post(url, json=data)
+    assert response.status_code == HTTPStatus.BAD_REQUEST
+
+
 def test_follow_user_id_request(client):
     data = {"id": os.environ["USER_ID"]}
     url = "/follow"

@@ -113,6 +113,20 @@ actions:
     output:
       type: map
 
+  unretweet:
+    help: Untweets a retweeted status.
+    arguments:
+      tweet:
+        in: requestBody
+        type: string
+        required: true
+    http:
+      path: /unretweet
+      method: post
+      port: 8000
+    output:
+      type: map
+
   tweet:
     help: Tweet a message
     arguments:
