@@ -1,4 +1,4 @@
-omg: 1
+oms: 1
 info:
   version: 1.0.0
   title: Twitter
@@ -12,7 +12,7 @@ info:
     email: hello@asyncy.com
 lifecycle:
   startup:
-    command: ["python", "/app/app.py"]
+    command: ['python', '/app/app.py']
 actions:
   # https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create.html
   follow:
@@ -74,7 +74,9 @@ actions:
       cursor:
         type: int
         in: requestBody
-        help: Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first “page.”
+        help:
+          Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the
+          first “page.”
         range:
           min: -1
       count:
@@ -87,7 +89,9 @@ actions:
       skip_status:
         type: boolean
         in: requestBody
-        help: When set to either true, statuses will not be included in the returned user objects. If set to any other value, statuses will be included.
+        help:
+          When set to either true, statuses will not be included in the returned user objects. If set to any other value,
+          statuses will be included.
     http:
       path: /followers
       method: post
@@ -127,6 +131,7 @@ actions:
     help: Stream tweets
     events:
       tweet:
+        help: Stream tweets
         arguments:
           track:
             in: requestBody
