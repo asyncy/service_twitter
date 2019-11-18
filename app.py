@@ -67,6 +67,18 @@ def retweet():
     return dumps(response._json)
 
 
+@app.route("/unretweet", methods=["POST"])
+def retweet():
+    t = getOauth()
+    data = request.json
+    if data.get("tweet") is None or data.get("tweet") == "":
+        res = {"status": "failed", "reason": "'tweet' parameter is missing"}
+        response_code = 400
+        return dumps(res), response_code
+    response = t.unretweet(int(data.pop("tweet")))
+    return dumps(response._json)
+
+
 @app.route("/follow", methods=["POST"])
 def follow():
     t = getOauth()
