@@ -5,16 +5,17 @@ info:
   description: Twitter as a microservice
   license:
     name: MIT
-    url: https://opensource.org/licenses/MIT
+    url: 'https://opensource.org/licenses/MIT'
   contact:
-    name: Asyncy
-    url: https://asyncy.com
-    email: hello@asyncy.com
+    name: Open Microservices
+    url: 'https://openmicroservices.org'
+    email: core@openmicroservices.org
 lifecycle:
   startup:
-    command: ['python', '/app/app.py']
+    command:
+      - python
+      - /app/app.py
 actions:
-  # https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create.html
   follow:
     help: Follow an user
     arguments:
@@ -36,8 +37,6 @@ actions:
       port: 8000
     output:
       type: map
-
-  # https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
   unfollow:
     help: Unfollow an user
     arguments:
@@ -55,13 +54,17 @@ actions:
       port: 8000
     output:
       type: map
-
-  # https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
   followers:
-    help: |
-      Returns a cursored collection of user objects for users following the specified user.
+    help: >
+      Returns a cursored collection of user objects for users following the
+      specified user.
 
-      At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple “pages” of results can be navigated through using the `next_cursor` value in subsequent requests.
+
+      At this time, results are ordered with the most recent following first —
+      however, this ordering is subject to unannounced change and eventual
+      consistency issues. Results are given in groups of 20 users and multiple
+      “pages” of results can be navigated through using the `next_cursor` value
+      in subsequent requests.
     arguments:
       handle:
         type: string
@@ -74,31 +77,32 @@ actions:
       cursor:
         type: int
         in: requestBody
-        help:
-          Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the
-          first “page.”
+        help: >-
+          Causes the results to be broken into pages. If no cursor is provided,
+          a value of -1 will be assumed, which is the first “page.”
         range:
           min: -1
       count:
         type: int
         in: requestBody
-        help: The number of users to return per page, up to a maximum of 200. Defaults to 20.
+        help: >-
+          The number of users to return per page, up to a maximum of 200.
+          Defaults to 20.
         range:
           min: 1
           max: 200
       skip_status:
         type: boolean
         in: requestBody
-        help:
-          When set to either true, statuses will not be included in the returned user objects. If set to any other value,
-          statuses will be included.
+        help: >-
+          When set to either true, statuses will not be included in the returned
+          user objects. If set to any other value, statuses will be included.
     http:
       path: /followers
       method: post
       port: 8000
     output:
       type: list
-
   retweet:
     help: Retweet a tweet
     arguments:
@@ -112,7 +116,6 @@ actions:
       port: 8000
     output:
       type: map
-
   tweet:
     help: Tweet a message
     arguments:
@@ -126,7 +129,6 @@ actions:
       port: 8000
     output:
       type: map
-
   stream:
     help: Stream tweets
     events:
@@ -136,8 +138,9 @@ actions:
           track:
             in: requestBody
             type: any
-            help: |
+            help: >
               A single string or list of phrases to track.
+
               https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters#track
         http:
           port: 8000
@@ -150,7 +153,6 @@ actions:
             method: post
         output:
           type: map
-
 environment:
   CONSUMER_KEY:
     required: true
