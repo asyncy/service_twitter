@@ -6,5 +6,5 @@ authors = ["support@storyscript.io"]
 
 [tool.poetry.dependencies]
 python-dotenv = "^0.10.3"
-pytest = "^5.0"
+pytest = "^6.2"
 pytest-flask = "^0.15.0"
